@@ -257,7 +257,7 @@ didReceiveResponse:(NSURLResponse *)response {
             annotationView = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
           //  annotationView.enabled = YES;
             annotationView.canShowCallout = YES;
-            NSString *markerURL = @"http://maps.google.com/intl/en_us/mapfiles/ms/micons/purple-dot.png";
+            NSString *markerURL = @"http://maps.google.com/mapfiles/marker_green.png";
             UIImage *markerImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:markerURL]]];
             annotationView.image = markerImage;
         } else {
