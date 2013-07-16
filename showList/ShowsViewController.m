@@ -6,24 +6,23 @@
 //  Copyright (c) 2013 Jennifer Louthan. All rights reserved.
 //
 
-#import <MapKit/MapKit.h>
-#import <GoogleMaps/GoogleMaps.h>
 #import "ShowsViewController.h"
 #import "showCell.h"
 #import "Event.h"
 #import "ShowDetailViewController.h"
-#import "MyLocation.h"
+#import "MyInfoWindow.h"
+#import "EventAPIManager.h"
 
 #define METERS_PER_MILE 1609.344
 
-@interface ShowsViewController () <UITableViewDataSource, UITableViewDelegate, MKMapViewDelegate>
-@property (nonatomic, strong) IBOutlet UITableView *tableView;
-@property (nonatomic, strong) IBOutlet MKMapView *mapView;
+@interface ShowsViewController () <UITableViewDataSource, UITableViewDelegate, GMSMapViewDelegate>
 @property (nonatomic, assign) BOOL flipped;
-//@property (nonatomic, strong) NSMutableArray *mapAnnotations;
+
 @end
 
-@implementation ShowsViewController
+@implementation ShowsViewController{
+    GMSMapView *mapView_;
+}
 
 - (void)viewDidLoad
 {
@@ -33,133 +32,67 @@
     self.flipButton.title = @"Map";
     self.navigationItem.title = @"Events";
     
+    [self.view addSubview:self.tableView];
+    
+    //set mapView delegate and enable your location
+    self.mapView.delegate = self;
+    self.mapView.myLocationEnabled = YES;
     
     [self getLatAndLong];
+
 }
 
-#pragma mark - My Class Methods
+#pragma mark - Network Methods
 
 -(void)getLatAndLong
 {
-    
-    NSString *path = [NSString stringWithFormat:@"http://maps.googleapis.com/maps/api/geocode/json?address=%@&sensor=false",self.address];
-    
-    path = [path stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:path]];
-    self.getLatLongConnection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
-    
-}
+    [[EventAPIManager sharedManager] getLatAndLongWithAddress:self.address successBlock:^(double latitude, double longitude){
+        self.latitude = latitude;
+        self.longitude = longitude;
+        [self getShowsNearby];
+    }
+                                                 failureBlock:^(NSError *error){
+                                                     NSLog(@"get error -- %@", [error localizedDescription]);
+                                                 }];
+    }
 
 -(void)getShowsNearby
 {
-    //will be inputted by user soon, for now it's one
-    self.showRadius =  5;
+    self.showRadius =  10;
     
-    //use address from text field in previous screen to query API
-    NSString *path = [NSString stringWithFormat:@"http://api.eventful.com/json/events/search?app_key=d3DQ7TBbGGmj2jMD&q=music&l=%lf,%lf&date=Today&within=%d&units=miles&page_size=100",self.latitude,self.longitude,self.showRadius];
-    
-    path = [path stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:path]];
-    self.getShowsConnection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
-    self.buffer = nil;
-}
+    [[EventAPIManager sharedManager] getEventsWithLatitude:self.latitude longitude:self.longitude radius:self.showRadius successBlock:^(NSMutableArray *events)
+     {
+         self.shows = events;
+         for(Event *event in self.shows){
+             //make pin for event
+             GMSMarker *pin = [[GMSMarker alloc] init];
+             pin.userData = event;
+             pin.position = CLLocationCoordinate2DMake(event.latitude.doubleValue, event.longitude.doubleValue);
+             pin.icon = [self retrieveMarkerImage];
+             pin.map = self.mapView;
+             
+             [self.tableView reloadData];
 
-#pragma mark - NSURLConnection Delegate 
-
-- (void)connection:(NSURLConnection *)connection
-didReceiveResponse:(NSURLResponse *)response {
-    self.buffer = [NSMutableData data];
-}
-
-- (void)connection:(NSURLConnection *)connection
-    didReceiveData:(NSData *)data {
-    [self.buffer appendData:data];
-}
-
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
-    
-    if(connection == self.getLatLongConnection){
-        
-        //close connection and get coordinates of address entered
-        
-        self.getLatLongConnection = nil;
-        
-        NSDictionary *result = [NSJSONSerialization JSONObjectWithData:self.buffer options:kNilOptions error:nil];
-        
-        NSArray *results = result[@"results"];
-        NSDictionary *location = results[0][@"geometry"][@"location"];
-        self.latitude = [location[@"lat"] doubleValue];
-        self.longitude = [location[@"lng"] doubleValue];
-        
-        //get shows using coordinates of address
-        [self getShowsNearby];
-
-    }
-    
-    
-    if(connection == self.getShowsConnection){
-    
-    self.getShowsConnection = nil;
-    
-    NSDictionary *result = [NSJSONSerialization JSONObjectWithData:self.buffer options:kNilOptions error:nil];
-    
-    NSArray *events = result[@"events"][@"event"];
-    
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
-        [dateFormatter setDateFormat:@"yyy-MM-dd HH:mm:ss"];
-        
-    for (NSDictionary *eventInfo in events)
-    {
- 
-        Event *event = [[Event alloc] init];
-        event.artistName = eventInfo[@"title"];
-        event.venueName = eventInfo[@"venue_name"];
-        event.latitude = eventInfo[@"latitude"];
-        event.longitude = eventInfo[@"longitude"];
-        event.startTime = [dateFormatter dateFromString:eventInfo[@"start_time"]];
-        event.description = eventInfo[@"description"];
-        event.address = eventInfo[@"venue_address"];
-        if([eventInfo[@"all_day"] isEqualToString:@"0"]){
-            event.hasStartTime = YES;
-        }
-        else if([eventInfo[@"all_day"] isEqualToString:@"1"]){
-            event.isAllDay = YES;
-        }
-        
-        [self.shows addObject:event];
-        
-        //make coordinate for event
-        CLLocationCoordinate2D coordinate;
-        coordinate.latitude = event.latitude.doubleValue;
-        coordinate.longitude = event.longitude.doubleValue;
-        
-        //make annotation with coordinate and add to map view
-        MKPointAnnotation *point = [[MKPointAnnotation alloc] init];
-        point.coordinate = coordinate;
-        point.title = event.artistName;
-        point.subtitle = event.venueName;
-        
-        self.buffer = nil;
-        
-        MyLocation *annotation = [[MyLocation alloc]initWithName:event.artistName venue:event.venueName address:@"dummy address" coordinate:coordinate];
-        [self.mapView addAnnotation:annotation];
-       // [self.mapView addAnnotation:point];
-        [self.tableView reloadData];
-        
-        
-    }
-    }
-    
-    
+         }
+         self.mapView.camera = [GMSCameraPosition cameraWithLatitude:self.latitude longitude:self.longitude zoom:13.0];
+     }
+                                              failureBlock:^(NSError *error){
+                                                  
+                                              }];
 }
 
 #pragma mark - Segue and Flip
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    
     //give event for selected row to detail view controller
     if([[segue identifier] isEqualToString:@"ShowDetails"]){
         ShowDetailViewController *detailViewController = [segue destinationViewController];
         detailViewController.Event = [self.shows objectAtIndex:[self.tableView indexPathForSelectedRow].row];
+        
+        UIBarButtonItem *newBackButton = [[UIBarButtonItem alloc] initWithTitle: @"Event List" style: UIBarButtonItemStyleBordered target: nil action: nil];
+        
+        [[self navigationItem] setBackBarButtonItem: newBackButton];
     }
 }
 
@@ -218,56 +151,41 @@ didReceiveResponse:(NSURLResponse *)response {
 
 #pragma mark - TableViewDelegate
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+
+#pragma mark - GMSMapViewDelegate
+
+-(UIView *)mapView:(GMSMapView *)mapView markerInfoWindow:(GMSMarker *)marker{
+  
+    Event *event = marker.userData;
+    MyInfoWindow *infoWindow = [[MyInfoWindow alloc]initWithEvent:event];
+    
+    return infoWindow;
 }
 
+-(void)mapView:(GMSMapView *)mapView didTapInfoWindowOfMarker:(GMSMarker *)marker{
+    
+    ShowDetailViewController *destinationViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"detailViewController"];
+    
+    destinationViewController.event = marker.userData;
+    
+    UIBarButtonItem *newBackButton = [[UIBarButtonItem alloc] initWithTitle: @"Event Map" style: UIBarButtonItemStyleBordered target: nil action: nil];
+    
+    [[self navigationItem] setBackBarButtonItem: newBackButton];
 
-#pragma mark - MapViewDelegate
-
--(void)mapViewWillStartLoadingMap:(MKMapView *)mapView{
-    
-    //make location to zoom to
-    CLLocationCoordinate2D zoomLocation;
-    zoomLocation.latitude = self.latitude;
-    zoomLocation.longitude = self.longitude;
-    
-    //make view box around location we chose to zoom on
-    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(zoomLocation, 5.0*METERS_PER_MILE, 5.0*METERS_PER_MILE);
-    
-    //set our map view to zoom on this region with animation
-    [self.mapView setRegion:[self.mapView regionThatFits:viewRegion] animated:YES];
-    
+    [self.navigationController pushViewController:destinationViewController animated:NO];
     
 }
 
--(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation{
-    static NSString *identifier = @"MyLocation";
-    if ([annotation isKindOfClass:[MyLocation class]]) {
-        
-        MKAnnotationView *annotationView = (MKAnnotationView *) [self.mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
-        if (annotationView == nil) {
-            annotationView = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
-          //  annotationView.enabled = YES;
-            annotationView.canShowCallout = YES;
-            NSString *markerURL = @"http://maps.google.com/mapfiles/marker_green.png";
-            UIImage *markerImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:markerURL]]];
-            annotationView.image = markerImage;
-        } else {
-            annotationView.annotation = annotation;
-        }
-        
-        return annotationView;
+-(BOOL)mapView:(GMSMapView *)mapView didTapMarker:(GMSMarker *)marker{
+    return NO;
+}
+
+- (UIImage *)retrieveMarkerImage{
+    if(!self.markerImage){
+        NSString *markerUrl = @"http://maps.google.com/intl/en_us/mapfiles/ms/micons/purple-dot.png";
+        self.markerImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:markerUrl]]];
     }
-    
-    return nil;
+    return self.markerImage;
 }
 
 

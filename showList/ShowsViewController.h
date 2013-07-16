@@ -10,6 +10,10 @@
 #import <GoogleMaps/GoogleMaps.h>
 
 @interface ShowsViewController : UIViewController
+
+@property (weak, nonatomic) IBOutlet GMSMapView *mapView;
+@property (nonatomic, strong) IBOutlet UITableView *tableView;
+
 //user-inputted address
 @property (strong, nonatomic) NSString *address;
 @property (assign, nonatomic) double latitude;
@@ -20,12 +24,12 @@
 @property (strong, nonatomic) NSMutableArray *shows;
 //API related properties
 @property (nonatomic, retain) NSURLConnection *getLatLongConnection;
-@property (nonatomic, retain) NSURLConnection *getShowsConnection;
-@property (nonatomic, retain) NSMutableData *buffer;
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *flipButton;
+@property (nonatomic, strong) UIImage *markerImage;
 
 -(void)getShowsNearby;
 -(void)getLatAndLong;
+//-(UIImage *)retrieveMarkerImage;
 
 @end

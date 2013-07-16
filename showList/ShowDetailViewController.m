@@ -7,13 +7,13 @@
 //
 
 #import "ShowDetailViewController.h"
+#import <GoogleMaps/GoogleMaps.h>
 
 @interface ShowDetailViewController ()
 
 @end
 
 @implementation ShowDetailViewController
-
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -23,32 +23,31 @@
     return self;
 }
 
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
     self.navigationItem.title = @"Event Details";
-	
+    
     self.artistLabel.text = self.event.artistName;
+    [self.artistLabel sizeToFit];
     self.venueLabel.text = self.event.venueName;
     self.addressLabel.text = self.event.address;
-    
-    if((NSNull *)self.event.description != [NSNull null]){
-        self.descriptionLabel.text = self.event.description;
-    }
+    self.descriptionLabel.text = self.event.description;
+
     
     NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"HH:mm"];
     
     if(self.event.hasStartTime){
-    //self.timeLabel.text = [dateFormatter stringFromDate:self.event.startTime];
         NSString *startTime = [dateFormatter stringFromDate:self.event.startTime];
         self.timeLabel.text = [self formatTo12Hr:startTime];
     }
     else if(self.event.isAllDay){
         self.timeLabel.text = @"All Day";
     }
-    //self.ticketLabel.text = self.event.
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -76,5 +75,6 @@
     NSString *convertedTime = [NSString stringWithFormat:@"%@%@%@",hourString,minString,timeSuffix];
     return convertedTime;
 }
+
 
 @end
