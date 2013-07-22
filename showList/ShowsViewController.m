@@ -12,6 +12,7 @@
 #import "ShowDetailViewController.h"
 #import "MyInfoWindow.h"
 #import "EventAPIManager.h"
+#import "StyleController.h"
 
 #define METERS_PER_MILE 1609.344
 
@@ -21,7 +22,7 @@
 @end
 
 @implementation ShowsViewController{
-    GMSMapView *mapView_;
+
 }
 
 - (void)viewDidLoad
@@ -34,11 +35,22 @@
     
     [self.view addSubview:self.tableView];
     
-    //set mapView delegate and enable your location
     self.mapView.delegate = self;
-    self.mapView.myLocationEnabled = YES;
     
+    // if the use current location switch is on, get the location and use it. else, get lat and long for entered address
+    if(self.useDeviceLocation){
+        self.mapView.myLocationEnabled = YES;
+        self.mapView.settings.myLocationButton = YES;
+        self.latitude = (double)self.mapView.myLocation.coordinate.latitude;
+        self.longitude = self.mapView.myLocation.coordinate.longitude;
+        NSLog(@"lat is %lf and long is %lf",self.mapView.myLocation.coordinate.latitude,self.mapView.myLocation.coordinate.longitude);
+        NSLog(@"switch on");
+        [self getShowsNearby];
+    }
+    else{
+        NSLog(@"lat is %lf and long is %lf",self.mapView.myLocation.coordinate.latitude,self.mapView.myLocation.coordinate.longitude);
     [self getLatAndLong];
+    }
 
 }
 
@@ -85,10 +97,12 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     
-    //give event for selected row to detail view controller
+    //give event for selected row and starting address to the detail view controller
     if([[segue identifier] isEqualToString:@"ShowDetails"]){
         ShowDetailViewController *detailViewController = [segue destinationViewController];
         detailViewController.Event = [self.shows objectAtIndex:[self.tableView indexPathForSelectedRow].row];
+        detailViewController.startingLatitude = self.latitude;
+        detailViewController.startingLongitude = self.longitude;
         
         UIBarButtonItem *newBackButton = [[UIBarButtonItem alloc] initWithTitle: @"Event List" style: UIBarButtonItemStyleBordered target: nil action: nil];
         
@@ -144,7 +158,9 @@
     Event *currentEvent = self.shows[indexPath.row];
 
     cell.artistLabel.text = currentEvent.artistName;
+    cell.artistLabel.textColor = [[StyleController sharedStyleController] artistTextColor];
     cell.venueLabel.text = currentEvent.venueName;
+    cell.venueLabel.textColor = [[StyleController sharedStyleController] venueTextColor];
     
     return cell;
 }

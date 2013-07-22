@@ -7,6 +7,7 @@
 //
 
 #import "MyInfoWindow.h"
+#import "StyleController.h"
 
 @interface MyInfoWindow () 
 //-(void)buttonPressed;
@@ -26,19 +27,20 @@
         [self.titleLabel setNumberOfLines:0];
         [self.titleLabel setFont:[UIFont boldSystemFontOfSize:12.0]];
         [self.titleLabel setTextAlignment:NSTextAlignmentCenter];
+        [self.titleLabel setTextColor:[[StyleController sharedStyleController]artistTextColor]];
         [self addSubview:self.titleLabel];
         
         self.venueLabel = [[UILabel alloc]init];
         [self.venueLabel setNumberOfLines:0];
         [self.venueLabel setFont:[UIFont systemFontOfSize:12.0]];
         [self.venueLabel setTextAlignment:NSTextAlignmentCenter];
-        [self.venueLabel setTextColor:[UIColor greenColor]];
+        [self.venueLabel setTextColor:[[StyleController sharedStyleController]venueTextColor]];
         [self addSubview:self.venueLabel];
         
         self.infoLabel = [[UILabel alloc]init];
         [self.infoLabel setFont:[UIFont systemFontOfSize:12.0]];
         [self.infoLabel setTextAlignment:NSTextAlignmentCenter];
-        self.infoLabel.text = @"tap for more details";
+        self.infoLabel.text = @"tap for more details & directions";
         [self addSubview:self.infoLabel];
         
         self.titleLabel.text = [NSString stringWithFormat: @"%@",self.event.artistName];

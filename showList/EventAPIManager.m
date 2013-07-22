@@ -63,13 +63,15 @@
     
             Event *event = [[Event alloc] init];
             if([self stringIsValid:eventInfo[@"title"]])
-            event.artistName = eventInfo[@"title"];
+                event.artistName = eventInfo[@"title"];
             if([self stringIsValid:eventInfo[@"venue_name"]])
-            event.venueName = eventInfo[@"venue_name"];
+                event.venueName = eventInfo[@"venue_name"];
             if([self stringIsValid:eventInfo[@"description"]])
-            event.description = eventInfo[@"description"];
+                event.description = eventInfo[@"description"];
             if([self stringIsValid:eventInfo[@"venue_address"]])
-            event.address = eventInfo[@"venue_address"];
+                event.address = eventInfo[@"venue_address"];
+            if([self stringIsValid:eventInfo[@"url"]])
+                event.url = eventInfo[@"url"];
             event.latitude = eventInfo[@"latitude"];
             event.longitude = eventInfo[@"longitude"];
             event.startTime = [dateFormatter dateFromString:eventInfo[@"start_time"]];

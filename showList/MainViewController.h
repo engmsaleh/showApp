@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface MainViewController : UIViewController <UITextFieldDelegate>
-@property (weak, nonatomic) IBOutlet UITextField *addressField;
 
+@property (weak, nonatomic) IBOutlet UITextField *addressField;
+@property (weak, nonatomic) IBOutlet UISwitch *useDeviceLocation;
 
 @end

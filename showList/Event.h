@@ -17,6 +17,7 @@
 @property (nonatomic, strong) NSDate *startTime;
 @property (nonatomic, strong) NSString *description;
 @property (nonatomic, strong) NSString *address;
+@property (nonatomic, strong) NSString *url;
 @property BOOL hasStartTime;
 @property BOOL isAllDay;
 

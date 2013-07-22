@@ -26,6 +26,7 @@
 		181A14F6176BACE700134241 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 181A14F5176BACE700134241 /* MapKit.framework */; };
 		18279792179DAD440033BC53 /* GoogleMaps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18279791179DAD440033BC53 /* GoogleMaps.framework */; };
 		18279794179DAD660033BC53 /* GoogleMaps.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 18279793179DAD660033BC53 /* GoogleMaps.bundle */; };
+		18279798179DC2250033BC53 /* StyleController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18279797179DC2250033BC53 /* StyleController.m */; };
 		184CCC1B17824DB9002BBADA /* house.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 184CCC1A17824DB9002BBADA /* house.jpg */; };
 		18C628981795CE94002E21DA /* EventAPIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C628971795CE94002E21DA /* EventAPIManager.m */; };
 		18D23032178CC87400733ED9 /* MyInfoWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D23031178CC87400733ED9 /* MyInfoWindow.m */; };
@@ -72,6 +73,8 @@
 		181A14F5176BACE700134241 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		18279791179DAD440033BC53 /* GoogleMaps.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMaps.framework; sourceTree = "<group>"; };
 		18279793179DAD660033BC53 /* GoogleMaps.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = GoogleMaps.bundle; path = GoogleMaps.framework/Versions/A/Resources/GoogleMaps.bundle; sourceTree = "<group>"; };
+		18279796179DC2240033BC53 /* StyleController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StyleController.h; sourceTree = "<group>"; };
+		18279797179DC2250033BC53 /* StyleController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StyleController.m; sourceTree = "<group>"; };
 		184CCC1A17824DB9002BBADA /* house.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = house.jpg; sourceTree = SOURCE_ROOT; };
 		18C628961795CE94002E21DA /* EventAPIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventAPIManager.h; sourceTree = "<group>"; };
 		18C628971795CE94002E21DA /* EventAPIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventAPIManager.m; sourceTree = "<group>"; };
@@ -170,6 +173,8 @@
 				184CCC1A17824DB9002BBADA /* house.jpg */,
 				181A14D9176B823B00134241 /* showsAppDelegate.m */,
 				181A14E1176B823B00134241 /* MainStoryboard.storyboard */,
+				18279796179DC2240033BC53 /* StyleController.h */,
+				18279797179DC2250033BC53 /* StyleController.m */,
 				180B74EE17722A7E00EBDED1 /* ShowDetailViewController.h */,
 				180B74EF17722A7E00EBDED1 /* ShowDetailViewController.m */,
 				181A14EC176B82C400134241 /* ShowsViewController.h */,
@@ -281,6 +286,7 @@
 				180B74F017722A7E00EBDED1 /* ShowDetailViewController.m in Sources */,
 				18D23032178CC87400733ED9 /* MyInfoWindow.m in Sources */,
 				18C628981795CE94002E21DA /* EventAPIManager.m in Sources */,
+				18279798179DC2250033BC53 /* StyleController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -332,7 +338,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = YES;
 				"OTHER_LDFLAGS[arch=*]" = "-ObjC";
 				SDKROOT = iphoneos;
@@ -358,7 +364,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				"OTHER_LDFLAGS[arch=*]" = "-ObjC";
 				SDKROOT = iphoneos;

@@ -16,6 +16,7 @@
 
 //user-inputted address
 @property (strong, nonatomic) NSString *address;
+@property (nonatomic) BOOL useDeviceLocation;
 @property (assign, nonatomic) double latitude;
 @property (assign, nonatomic) double longitude;
 @property (nonatomic) NSInteger showRadius;
@@ -31,5 +32,5 @@
 -(void)getShowsNearby;
 -(void)getLatAndLong;
 //-(UIImage *)retrieveMarkerImage;
-
 @end
+ 

@@ -41,9 +41,13 @@
     if([[segue identifier] isEqualToString:@"ShowShows"]){
         ShowsViewController *showsViewController = [segue destinationViewController];
         
-        if([self.addressField.text length]>4){
-        showsViewController.address = self.addressField.text;
-        }else{
+        if([self.useDeviceLocation isOn]){
+            showsViewController.useDeviceLocation = YES;
+        }
+        else if([self.addressField.text length]>4){
+            showsViewController.address = self.addressField.text;
+        }
+        else{
             showsViewController.address = @"3308 se clinton st, portland, or 97202";
         }
     }

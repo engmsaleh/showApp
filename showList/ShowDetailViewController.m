@@ -7,6 +7,7 @@
 //
 
 #import "ShowDetailViewController.h"
+#import "StyleController.h"
 #import <GoogleMaps/GoogleMaps.h>
 
 @interface ShowDetailViewController ()
@@ -31,11 +32,11 @@
     self.navigationItem.title = @"Event Details";
     
     self.artistLabel.text = self.event.artistName;
-    [self.artistLabel sizeToFit];
+    self.artistLabel.textColor = [[StyleController sharedStyleController]artistTextColor];
     self.venueLabel.text = self.event.venueName;
+    self.venueLabel.textColor = [[StyleController sharedStyleController]venueTextColor];
     self.addressLabel.text = self.event.address;
     self.descriptionLabel.text = self.event.description;
-
     
     NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"HH:mm"];
@@ -74,6 +75,28 @@
     }
     NSString *convertedTime = [NSString stringWithFormat:@"%@%@%@",hourString,minString,timeSuffix];
     return convertedTime;
+}
+
+-(IBAction)getDirections{
+    
+    //use google maps if device has it
+    if([[UIApplication sharedApplication] canOpenURL:
+        [NSURL URLWithString:@"comgooglemaps://"]]){
+        
+        NSString *getDirectionsString = [NSString stringWithFormat:@"comgooglemaps://?saddr=%lf,%lf&daddr=%lf,%lf",self.startingLatitude,self.startingLongitude,self.event.latitude.doubleValue,self.event.longitude.doubleValue];
+        [[UIApplication sharedApplication]openURL:[NSURL URLWithString:getDirectionsString]];
+    }
+    
+    //otherwise use apple maps
+    else{
+        NSString *getDirectionsString = [NSString stringWithFormat:@"http://maps.apple.com/?daddr=%lf,%lf&saddr=%lf,%lf",self.event.latitude.doubleValue,self.event.longitude.doubleValue,self.startingLatitude,self.startingLongitude];
+        [[UIApplication sharedApplication]openURL:[NSURL URLWithString:getDirectionsString]];
+    }
+}
+
+-(IBAction)visitEventSite{
+    [[UIApplication sharedApplication]openURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@", self.event.url]]];
+
 }
 
 

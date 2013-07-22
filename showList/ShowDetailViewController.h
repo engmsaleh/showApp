@@ -11,6 +11,9 @@
 
 @interface ShowDetailViewController : UIViewController
 
+@property (nonatomic) double startingLatitude;
+@property (nonatomic) double startingLongitude;
+
 @property (strong, nonatomic) Event *event;
 @property (weak, nonatomic) IBOutlet UILabel *addressLabel;
 @property (weak, nonatomic) IBOutlet UILabel *artistLabel;
@@ -18,7 +21,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *ticketLabel;
 @property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
+@property (weak, nonatomic) IBOutlet UIButton *visitEventSiteButton;
 
 -(NSString*)formatTo12Hr:(NSString *)time;
+-(IBAction)getDirections;
+-(IBAction)visitEventSite;
 
 @end
