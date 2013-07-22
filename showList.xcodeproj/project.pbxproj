@@ -24,11 +24,11 @@
 		181A14F1176B85DC00134241 /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 181A14F0176B85DC00134241 /* Event.m */; };
 		181A14F4176B9B0200134241 /* showCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 181A14F3176B9B0200134241 /* showCell.m */; };
 		181A14F6176BACE700134241 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 181A14F5176BACE700134241 /* MapKit.framework */; };
+		18279792179DAD440033BC53 /* GoogleMaps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18279791179DAD440033BC53 /* GoogleMaps.framework */; };
+		18279794179DAD660033BC53 /* GoogleMaps.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 18279793179DAD660033BC53 /* GoogleMaps.bundle */; };
 		184CCC1B17824DB9002BBADA /* house.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 184CCC1A17824DB9002BBADA /* house.jpg */; };
 		18C628981795CE94002E21DA /* EventAPIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C628971795CE94002E21DA /* EventAPIManager.m */; };
 		18D23032178CC87400733ED9 /* MyInfoWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D23031178CC87400733ED9 /* MyInfoWindow.m */; };
-		18D6B65A177E138B00B2FB79 /* GoogleMaps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18D6B659177E138B00B2FB79 /* GoogleMaps.framework */; };
-		18D6B65C177E13A600B2FB79 /* GoogleMaps.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 18D6B65B177E13A600B2FB79 /* GoogleMaps.bundle */; };
 		18D6B65E177E13B600B2FB79 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18D6B65D177E13B600B2FB79 /* AVFoundation.framework */; };
 		18D6B660177E13BF00B2FB79 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18D6B65F177E13BF00B2FB79 /* CoreData.framework */; };
 		18D6B662177E13C400B2FB79 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18D6B661177E13C400B2FB79 /* CoreLocation.framework */; };
@@ -70,13 +70,13 @@
 		181A14F2176B9B0200134241 /* showCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = showCell.h; path = ../showCell.h; sourceTree = "<group>"; };
 		181A14F3176B9B0200134241 /* showCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = showCell.m; path = ../showCell.m; sourceTree = "<group>"; };
 		181A14F5176BACE700134241 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		18279791179DAD440033BC53 /* GoogleMaps.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMaps.framework; sourceTree = "<group>"; };
+		18279793179DAD660033BC53 /* GoogleMaps.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = GoogleMaps.bundle; path = GoogleMaps.framework/Versions/A/Resources/GoogleMaps.bundle; sourceTree = "<group>"; };
 		184CCC1A17824DB9002BBADA /* house.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = house.jpg; sourceTree = SOURCE_ROOT; };
 		18C628961795CE94002E21DA /* EventAPIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventAPIManager.h; sourceTree = "<group>"; };
 		18C628971795CE94002E21DA /* EventAPIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventAPIManager.m; sourceTree = "<group>"; };
 		18D23030178CC87400733ED9 /* MyInfoWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyInfoWindow.h; sourceTree = "<group>"; };
 		18D23031178CC87400733ED9 /* MyInfoWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyInfoWindow.m; sourceTree = "<group>"; };
-		18D6B659177E138B00B2FB79 /* GoogleMaps.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMaps.framework; sourceTree = "<group>"; };
-		18D6B65B177E13A600B2FB79 /* GoogleMaps.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = GoogleMaps.bundle; path = GoogleMaps.framework/Versions/A/Resources/GoogleMaps.bundle; sourceTree = "<group>"; };
 		18D6B65D177E13B600B2FB79 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		18D6B65F177E13BF00B2FB79 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		18D6B661177E13C400B2FB79 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -113,7 +113,7 @@
 				181A14CA176B823B00134241 /* UIKit.framework in Frameworks */,
 				181A14CC176B823B00134241 /* Foundation.framework in Frameworks */,
 				181A14CE176B823B00134241 /* CoreGraphics.framework in Frameworks */,
-				18D6B65A177E138B00B2FB79 /* GoogleMaps.framework in Frameworks */,
+				18279792179DAD440033BC53 /* GoogleMaps.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -140,6 +140,8 @@
 		181A14C8176B823B00134241 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				18279793179DAD660033BC53 /* GoogleMaps.bundle */,
+				18279791179DAD440033BC53 /* GoogleMaps.framework */,
 				18D6B66D177E141000B2FB79 /* libz.dylib */,
 				18D6B66B177E140800B2FB79 /* libicucore.dylib */,
 				18D6B669177E13FB00B2FB79 /* libc++.dylib */,
@@ -152,8 +154,6 @@
 				18D6B671177E142500B2FB79 /* QuartzCore.framework */,
 				18D6B66F177E141C00B2FB79 /* OpenGLES.framework */,
 				18D6B673177E142E00B2FB79 /* SystemConfiguration.framework */,
-				18D6B65B177E13A600B2FB79 /* GoogleMaps.bundle */,
-				18D6B659177E138B00B2FB79 /* GoogleMaps.framework */,
 				180B74E71770FFBE00EBDED1 /* AddressBook.framework */,
 				181A14F5176BACE700134241 /* MapKit.framework */,
 				181A14C9176B823B00134241 /* UIKit.framework */,
@@ -260,8 +260,8 @@
 				181A14DE176B823B00134241 /* Default@2x.png in Resources */,
 				181A14E0176B823B00134241 /* Default-568h@2x.png in Resources */,
 				181A14E3176B823B00134241 /* MainStoryboard.storyboard in Resources */,
-				18D6B65C177E13A600B2FB79 /* GoogleMaps.bundle in Resources */,
 				184CCC1B17824DB9002BBADA /* house.jpg in Resources */,
+				18279794179DAD660033BC53 /* GoogleMaps.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

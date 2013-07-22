@@ -8,10 +8,14 @@
 
 #import "MyInfoWindow.h"
 
+@interface MyInfoWindow () 
+//-(void)buttonPressed;
+@end
+
 @implementation MyInfoWindow
 
 - (id)initWithEvent:(Event *)event{
-    self = [super initWithFrame:CGRectMake(0, 0, 200, 140)];
+    self = [super initWithFrame:CGRectMake(0, 0, 200, 145)];
     if (self) {
         // Initialization code
         
@@ -23,6 +27,14 @@
         [self.titleLabel setFont:[UIFont boldSystemFontOfSize:12.0]];
         [self.titleLabel setTextAlignment:NSTextAlignmentCenter];
         [self addSubview:self.titleLabel];
+//        
+//        self.detailsButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+//        self.detailsButton.frame = CGRectMake(10, 120, 180, 24);
+//        self.detailsButton.clipsToBounds = YES;
+//
+//        [self.detailsButton setTitle:@"more details" forState:UIControlStateNormal];
+//        [self.detailsButton addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
+//        [self addSubview:self.detailsButton];
         
         self.infoLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 112, 180, 14)];
         [self.infoLabel setFont:[UIFont systemFontOfSize:12.0]];
@@ -43,6 +55,11 @@
     
     return self;
 }
+
+//-(void)buttonPressed{
+//    NSLog(@"pressed");
+//}
+
 
 - (id)initWithFrame:(CGRect)frame
 {

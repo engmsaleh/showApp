@@ -15,9 +15,9 @@
 
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UILabel *infoLabel;
-//@property (nonatomic, strong) UIButton *showDetails;
+//@property (nonatomic, strong) UIButton *detailsButton;
 @property (nonatomic, strong) Event *event;
 
 -(id)initWithEvent:(Event *)event;
-//-(void)showDetailView:(id)sender;
+//-(void)buttonPressed;
 @end
