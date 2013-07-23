@@ -21,26 +21,34 @@
         // Initialization code
         
         self.event = event;
-        [self setBackgroundColor:[UIColor whiteColor]];
+        UIColor *backgroundColor = [[StyleController sharedStyleController]primaryBackgroundColor];
+        UIFont *primaryFont = [[StyleController sharedStyleController]navFont];
+        UIFont *detailFont = [[StyleController sharedStyleController]detailFont];
+        
+        self.layer.cornerRadius = 10;
+        self.backgroundColor = backgroundColor;
         
         self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 5, 180, 100)];
-        [self.titleLabel setNumberOfLines:0];
-        [self.titleLabel setFont:[UIFont boldSystemFontOfSize:12.0]];
-        [self.titleLabel setTextAlignment:NSTextAlignmentCenter];
-        [self.titleLabel setTextColor:[[StyleController sharedStyleController]artistTextColor]];
+        self.titleLabel.numberOfLines = 0;
+        self.titleLabel.font = [primaryFont fontWithSize:14];
+        self.titleLabel.textAlignment = NSTextAlignmentCenter;
+        self.titleLabel.textColor = [[StyleController sharedStyleController]artistTextColor];
+        self.titleLabel.backgroundColor = backgroundColor;
         [self addSubview:self.titleLabel];
         
         self.venueLabel = [[UILabel alloc]init];
-        [self.venueLabel setNumberOfLines:0];
-        [self.venueLabel setFont:[UIFont systemFontOfSize:12.0]];
-        [self.venueLabel setTextAlignment:NSTextAlignmentCenter];
-        [self.venueLabel setTextColor:[[StyleController sharedStyleController]venueTextColor]];
+        self.venueLabel.numberOfLines = 0;
+        self.venueLabel.font = [primaryFont fontWithSize:12];
+        self.venueLabel.textAlignment = NSTextAlignmentCenter;
+        self.venueLabel.textColor = [[StyleController sharedStyleController]venueTextColor];
+        self.venueLabel.backgroundColor = backgroundColor;
         [self addSubview:self.venueLabel];
         
         self.infoLabel = [[UILabel alloc]init];
-        [self.infoLabel setFont:[UIFont systemFontOfSize:12.0]];
-        [self.infoLabel setTextAlignment:NSTextAlignmentCenter];
+        self.infoLabel.font = [detailFont fontWithSize:12];
+        self.infoLabel.textAlignment = NSTextAlignmentCenter;
         self.infoLabel.text = @"tap for more details & directions";
+        self.infoLabel.backgroundColor = backgroundColor;
         [self addSubview:self.infoLabel];
         
         self.titleLabel.text = [NSString stringWithFormat: @"%@",self.event.artistName];
@@ -69,9 +77,9 @@
     
     CGSize label3Size = [label3.text sizeWithFont:label3.font constrainedToSize:label3.frame.size lineBreakMode:label3.lineBreakMode];
     
-    label3.frame = CGRectMake(margin, label1Size.height + label2Size.height + margin, width, label3Size.height);
+    label3.frame = CGRectMake(margin, label1Size.height + label2Size.height + 3*margin, width, label3Size.height);
     
-    CGFloat responsiveHeight = label1Size.height + label2Size.height + 5*margin;
+    CGFloat responsiveHeight = label1Size.height + label2Size.height + label3Size.height + 5*margin;
     
     self.frame = CGRectMake(0, 0, width+2*margin, responsiveHeight);
 }

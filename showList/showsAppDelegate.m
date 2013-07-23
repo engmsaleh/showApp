@@ -7,6 +7,7 @@
 //
 
 #import "showsAppDelegate.h"
+#import "StyleController.h"
 #import <GoogleMaps/GoogleMaps.h>
 
 @implementation showsAppDelegate
@@ -15,7 +16,8 @@
 {
     
     [GMSServices provideAPIKey:@"AIzaSyCvWuNWUXu3tod47kVAVMA5seavNJxARt8"];
-    // Override point for customization after application launch.
+    [[StyleController sharedStyleController]applyStyle];
+    
     return YES;
 }
 							

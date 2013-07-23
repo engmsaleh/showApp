@@ -22,6 +22,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *ticketLabel;
 @property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
 @property (weak, nonatomic) IBOutlet UIButton *visitEventSiteButton;
+@property (weak, nonatomic) IBOutlet UIButton *getDirectionsButton;
 
 -(NSString*)formatTo12Hr:(NSString *)time;
 -(IBAction)getDirections;

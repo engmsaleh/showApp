@@ -29,14 +29,37 @@
 {
     [super viewDidLoad];
     
+    UIColor *buttonTitleColor = [[StyleController sharedStyleController] detailTextColor];
+    UIColor *buttonBackgroundColor = [[StyleController sharedStyleController] buttonBackgroundColor];
+    UIColor *artistLabelColor = [[StyleController sharedStyleController] artistTextColor];
+    UIColor *venueLabelColor = [[StyleController sharedStyleController]venueTextColor];
+    UIColor *backgroundColor = [[StyleController sharedStyleController]primaryBackgroundColor];
+    UIFont *primaryFont = [[StyleController sharedStyleController]navFont];
+    UIFont *detailFont = [[StyleController sharedStyleController]detailFont];
+    
     self.navigationItem.title = @"Event Details";
+    self.view.backgroundColor = backgroundColor;
     
     self.artistLabel.text = self.event.artistName;
-    self.artistLabel.textColor = [[StyleController sharedStyleController]artistTextColor];
+    self.artistLabel.textColor = artistLabelColor;
+    self.artistLabel.font = [primaryFont fontWithSize:20];
     self.venueLabel.text = self.event.venueName;
-    self.venueLabel.textColor = [[StyleController sharedStyleController]venueTextColor];
+    self.venueLabel.textColor = venueLabelColor;
+    self.venueLabel.font = [primaryFont fontWithSize:16];
     self.addressLabel.text = self.event.address;
+    self.addressLabel.font = [detailFont fontWithSize:14];
     self.descriptionLabel.text = self.event.description;
+    self.descriptionLabel.font = detailFont;
+    
+    self.getDirectionsButton.layer.cornerRadius = 5;
+    self.getDirectionsButton.backgroundColor = buttonBackgroundColor;
+    [self.getDirectionsButton titleLabel].font = [primaryFont fontWithSize:14];
+    [self.getDirectionsButton setTitleColor:buttonTitleColor forState:UIControlStateNormal];
+    
+    self.visitEventSiteButton.layer.cornerRadius = 5;
+    self.visitEventSiteButton.backgroundColor = buttonBackgroundColor;
+    [self.visitEventSiteButton titleLabel].font = [primaryFont fontWithSize:14];
+    [self.visitEventSiteButton setTitleColor:buttonTitleColor forState:UIControlStateNormal];
     
     NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"HH:mm"];

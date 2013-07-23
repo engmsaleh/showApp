@@ -42,6 +42,14 @@
 		18D6B670177E141C00B2FB79 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18D6B66F177E141C00B2FB79 /* OpenGLES.framework */; };
 		18D6B672177E142500B2FB79 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18D6B671177E142500B2FB79 /* QuartzCore.framework */; };
 		18D6B674177E142E00B2FB79 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18D6B673177E142E00B2FB79 /* SystemConfiguration.framework */; };
+		18ECC9F6179F2F62003C8ED6 /* Days.otf in Resources */ = {isa = PBXBuildFile; fileRef = 18ECC9F5179F2F62003C8ED6 /* Days.otf */; };
+		18ECC9F8179F306E003C8ED6 /* Inder-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 18ECC9F7179F306D003C8ED6 /* Inder-Regular.otf */; };
+		18F70FED179EFD9A002DF15B /* nav_image.png in Resources */ = {isa = PBXBuildFile; fileRef = 18F70FEC179EFD9A002DF15B /* nav_image.png */; };
+		18F70FEF179F0072002DF15B /* Amaranth.otf in Resources */ = {isa = PBXBuildFile; fileRef = 18F70FEE179F0072002DF15B /* Amaranth.otf */; };
+		18F70FF2179F0691002DF15B /* CartoGothicStd-Book.otf in Resources */ = {isa = PBXBuildFile; fileRef = 18F70FF1179F0691002DF15B /* CartoGothicStd-Book.otf */; };
+		18F70FF7179F284B002DF15B /* button_back.png in Resources */ = {isa = PBXBuildFile; fileRef = 18F70FF6179F284B002DF15B /* button_back.png */; };
+		18F70FF9179F2916002DF15B /* button_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 18F70FF8179F2916002DF15B /* button_normal.png */; };
+		18F70FFB179F29A3002DF15B /* texgyrebonum-regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 18F70FFA179F29A3002DF15B /* texgyrebonum-regular.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -92,6 +100,14 @@
 		18D6B66F177E141C00B2FB79 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		18D6B671177E142500B2FB79 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		18D6B673177E142E00B2FB79 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		18ECC9F5179F2F62003C8ED6 /* Days.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Days.otf; sourceTree = "<group>"; };
+		18ECC9F7179F306D003C8ED6 /* Inder-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inder-Regular.otf"; sourceTree = "<group>"; };
+		18F70FEC179EFD9A002DF15B /* nav_image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nav_image.png; sourceTree = SOURCE_ROOT; };
+		18F70FEE179F0072002DF15B /* Amaranth.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Amaranth.otf; sourceTree = "<group>"; };
+		18F70FF1179F0691002DF15B /* CartoGothicStd-Book.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CartoGothicStd-Book.otf"; sourceTree = "<group>"; };
+		18F70FF6179F284B002DF15B /* button_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_back.png; sourceTree = "<group>"; };
+		18F70FF8179F2916002DF15B /* button_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_normal.png; sourceTree = "<group>"; };
+		18F70FFA179F29A3002DF15B /* texgyrebonum-regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "texgyrebonum-regular.otf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,12 +185,12 @@
 		181A14CF176B823B00134241 /* showList */ = {
 			isa = PBXGroup;
 			children = (
+				18F70FF5179F0743002DF15B /* Network */,
+				18F70FF4179F0731002DF15B /* Styles */,
+				18F70FF3179F0710002DF15B /* Resources */,
 				181A14D8176B823B00134241 /* showsAppDelegate.h */,
-				184CCC1A17824DB9002BBADA /* house.jpg */,
 				181A14D9176B823B00134241 /* showsAppDelegate.m */,
 				181A14E1176B823B00134241 /* MainStoryboard.storyboard */,
-				18279796179DC2240033BC53 /* StyleController.h */,
-				18279797179DC2250033BC53 /* StyleController.m */,
 				180B74EE17722A7E00EBDED1 /* ShowDetailViewController.h */,
 				180B74EF17722A7E00EBDED1 /* ShowDetailViewController.m */,
 				181A14EC176B82C400134241 /* ShowsViewController.h */,
@@ -188,8 +204,6 @@
 				181A14F2176B9B0200134241 /* showCell.h */,
 				181A14F3176B9B0200134241 /* showCell.m */,
 				181A14D0176B823B00134241 /* Supporting Files */,
-				18C628961795CE94002E21DA /* EventAPIManager.h */,
-				18C628971795CE94002E21DA /* EventAPIManager.m */,
 			);
 			path = showList;
 			sourceTree = "<group>";
@@ -206,6 +220,40 @@
 				181A14DF176B823B00134241 /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		18F70FF3179F0710002DF15B /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				18ECC9F7179F306D003C8ED6 /* Inder-Regular.otf */,
+				18ECC9F5179F2F62003C8ED6 /* Days.otf */,
+				18F70FFA179F29A3002DF15B /* texgyrebonum-regular.otf */,
+				18F70FF8179F2916002DF15B /* button_normal.png */,
+				18F70FF6179F284B002DF15B /* button_back.png */,
+				18F70FEC179EFD9A002DF15B /* nav_image.png */,
+				18F70FF1179F0691002DF15B /* CartoGothicStd-Book.otf */,
+				184CCC1A17824DB9002BBADA /* house.jpg */,
+				18F70FEE179F0072002DF15B /* Amaranth.otf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		18F70FF4179F0731002DF15B /* Styles */ = {
+			isa = PBXGroup;
+			children = (
+				18279796179DC2240033BC53 /* StyleController.h */,
+				18279797179DC2250033BC53 /* StyleController.m */,
+			);
+			name = Styles;
+			sourceTree = "<group>";
+		};
+		18F70FF5179F0743002DF15B /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				18C628971795CE94002E21DA /* EventAPIManager.m */,
+				18C628961795CE94002E21DA /* EventAPIManager.h */,
+			);
+			name = Network;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -267,6 +315,14 @@
 				181A14E3176B823B00134241 /* MainStoryboard.storyboard in Resources */,
 				184CCC1B17824DB9002BBADA /* house.jpg in Resources */,
 				18279794179DAD660033BC53 /* GoogleMaps.bundle in Resources */,
+				18F70FED179EFD9A002DF15B /* nav_image.png in Resources */,
+				18F70FEF179F0072002DF15B /* Amaranth.otf in Resources */,
+				18F70FF2179F0691002DF15B /* CartoGothicStd-Book.otf in Resources */,
+				18F70FF7179F284B002DF15B /* button_back.png in Resources */,
+				18F70FF9179F2916002DF15B /* button_normal.png in Resources */,
+				18F70FFB179F29A3002DF15B /* texgyrebonum-regular.otf in Resources */,
+				18ECC9F6179F2F62003C8ED6 /* Days.otf in Resources */,
+				18ECC9F8179F306E003C8ED6 /* Inder-Regular.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -338,7 +394,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				ONLY_ACTIVE_ARCH = YES;
 				"OTHER_LDFLAGS[arch=*]" = "-ObjC";
 				SDKROOT = iphoneos;
@@ -364,7 +420,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				"OTHER_LDFLAGS[arch=*]" = "-ObjC";
 				SDKROOT = iphoneos;

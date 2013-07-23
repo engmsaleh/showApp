@@ -11,11 +11,15 @@
 @interface StyleController : NSObject
 
 +(instancetype)sharedStyleController;
-- (UIColor *)colorWithHex:(UInt32)hex;
+- (UIColor *)colorWithHex:(UInt32)hex alpha:(CGFloat)alpha;
 -(void)applyStyle;
 
 @property (nonatomic, strong, readonly) UIColor *artistTextColor;
 @property (nonatomic, strong, readonly) UIColor *venueTextColor;
 @property (nonatomic, strong, readonly) UIColor *detailTextColor;
+@property (nonatomic, strong, readonly) UIColor *primaryBackgroundColor;
+@property (nonatomic, strong, readonly) UIColor *buttonBackgroundColor;
+@property (nonatomic, strong, readonly) UIFont *navFont;
+@property (nonatomic, strong, readonly) UIFont *detailFont;
 
 @end

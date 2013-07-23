@@ -42,6 +42,7 @@
         self.mapView.myLocationEnabled = YES;
         self.mapView.settings.myLocationButton = YES;
         self.latitude = (double)self.mapView.myLocation.coordinate.latitude;
+//        CLLocation *myLocation = self.mapView.myLocation;
         self.longitude = self.mapView.myLocation.coordinate.longitude;
         NSLog(@"lat is %lf and long is %lf",self.mapView.myLocation.coordinate.latitude,self.mapView.myLocation.coordinate.longitude);
         NSLog(@"switch on");
@@ -159,14 +160,21 @@
 
     cell.artistLabel.text = currentEvent.artistName;
     cell.artistLabel.textColor = [[StyleController sharedStyleController] artistTextColor];
+    cell.artistLabel.font = [[[StyleController sharedStyleController]navFont] fontWithSize:14];
     cell.venueLabel.text = currentEvent.venueName;
     cell.venueLabel.textColor = [[StyleController sharedStyleController] venueTextColor];
+    cell.venueLabel.font = [[StyleController sharedStyleController]detailFont];
     
     return cell;
 }
 
 #pragma mark - TableViewDelegate
 
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    cell.backgroundColor = [[StyleController sharedStyleController]primaryBackgroundColor];
+
+}
 
 #pragma mark - GMSMapViewDelegate
 
@@ -198,7 +206,7 @@
 
 - (UIImage *)retrieveMarkerImage{
     if(!self.markerImage){
-        NSString *markerUrl = @"http://maps.google.com/intl/en_us/mapfiles/ms/micons/purple-dot.png";
+        NSString *markerUrl = @"http://maps.google.com/intl/en_us/mapfiles/ms/micons/blue-dot.png";
         self.markerImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:markerUrl]]];
     }
     return self.markerImage;

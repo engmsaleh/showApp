@@ -7,6 +7,7 @@
 //
 
 #import "showCell.h"
+#import "StyleController.h"
 
 @implementation showCell
 

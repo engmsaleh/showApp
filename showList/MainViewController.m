@@ -8,6 +8,7 @@
 
 #import "MainViewController.h"
 #import "ShowsViewController.h"
+#import "StyleController.h"
 
 @interface MainViewController ()
 
@@ -18,9 +19,30 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    UIColor *primaryTextColor = [[StyleController sharedStyleController]artistTextColor];
+    UIColor *buttonTextColor = [[StyleController sharedStyleController]detailTextColor];
+    UIColor *backgroundColor = [[StyleController sharedStyleController]primaryBackgroundColor];
+    UIColor *buttonColor = [[StyleController sharedStyleController]buttonBackgroundColor];
+    UIFont *primaryFont = [[StyleController sharedStyleController]navFont];
+    
+    self.view.backgroundColor = backgroundColor;
     self.navigationItem.title = @"Event Search";
     self.addressField.placeholder = @"3308 SE Clinton St, Portland, OR 97202";
+    self.addressFieldLabel.textColor = primaryTextColor;
+    self.addressFieldLabel.font = [primaryFont fontWithSize:18];
+    self.orLabel.textColor = buttonTextColor;
+    self.orLabel.font = [primaryFont fontWithSize:18];
+    self.useDeviceLocationLabel.textColor = primaryTextColor;
+    self.useDeviceLocationLabel.font = [primaryFont fontWithSize:18];
+    self.useDeviceLocation.onTintColor = buttonColor;
+    self.retrieveShowsButton.layer.cornerRadius = 10;
+    self.retrieveShowsButton.backgroundColor = buttonColor;
+    [self.retrieveShowsButton setTitleColor:buttonTextColor forState:UIControlStateNormal];
+    [self.retrieveShowsButton titleLabel].font = [primaryFont fontWithSize:16];
+    
 }
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -39,7 +61,11 @@
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if([[segue identifier] isEqualToString:@"ShowShows"]){
+        
         ShowsViewController *showsViewController = [segue destinationViewController];
+        
+        UIBarButtonItem *newBackButton = [[UIBarButtonItem alloc] initWithTitle: @"New Location" style: UIBarButtonItemStyleBordered target: nil action: nil];
+        [[self navigationItem] setBackBarButtonItem: newBackButton];
         
         if([self.useDeviceLocation isOn]){
             showsViewController.useDeviceLocation = YES;
