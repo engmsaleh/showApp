@@ -28,6 +28,7 @@
 		18279794179DAD660033BC53 /* GoogleMaps.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 18279793179DAD660033BC53 /* GoogleMaps.bundle */; };
 		18279798179DC2250033BC53 /* StyleController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18279797179DC2250033BC53 /* StyleController.m */; };
 		184CCC1B17824DB9002BBADA /* house.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 184CCC1A17824DB9002BBADA /* house.jpg */; };
+		18648FF117A303F80064C414 /* ShowsLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 18648FF017A303F80064C414 /* ShowsLocationManager.m */; };
 		18C628981795CE94002E21DA /* EventAPIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C628971795CE94002E21DA /* EventAPIManager.m */; };
 		18D23032178CC87400733ED9 /* MyInfoWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D23031178CC87400733ED9 /* MyInfoWindow.m */; };
 		18D6B65E177E13B600B2FB79 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18D6B65D177E13B600B2FB79 /* AVFoundation.framework */; };
@@ -84,6 +85,8 @@
 		18279796179DC2240033BC53 /* StyleController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StyleController.h; sourceTree = "<group>"; };
 		18279797179DC2250033BC53 /* StyleController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StyleController.m; sourceTree = "<group>"; };
 		184CCC1A17824DB9002BBADA /* house.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = house.jpg; sourceTree = SOURCE_ROOT; };
+		18648FEF17A303F80064C414 /* ShowsLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowsLocationManager.h; sourceTree = "<group>"; };
+		18648FF017A303F80064C414 /* ShowsLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowsLocationManager.m; sourceTree = "<group>"; };
 		18C628961795CE94002E21DA /* EventAPIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventAPIManager.h; sourceTree = "<group>"; };
 		18C628971795CE94002E21DA /* EventAPIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventAPIManager.m; sourceTree = "<group>"; };
 		18D23030178CC87400733ED9 /* MyInfoWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyInfoWindow.h; sourceTree = "<group>"; };
@@ -115,6 +118,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18D6B662177E13C400B2FB79 /* CoreLocation.framework in Frameworks */,
 				18D6B674177E142E00B2FB79 /* SystemConfiguration.framework in Frameworks */,
 				18D6B672177E142500B2FB79 /* QuartzCore.framework in Frameworks */,
 				18D6B670177E141C00B2FB79 /* OpenGLES.framework in Frameworks */,
@@ -124,7 +128,6 @@
 				18D6B668177E13E400B2FB79 /* ImageIO.framework in Frameworks */,
 				18D6B666177E13D200B2FB79 /* GLKit.framework in Frameworks */,
 				18D6B664177E13CD00B2FB79 /* CoreText.framework in Frameworks */,
-				18D6B662177E13C400B2FB79 /* CoreLocation.framework in Frameworks */,
 				18D6B660177E13BF00B2FB79 /* CoreData.framework in Frameworks */,
 				18D6B65E177E13B600B2FB79 /* AVFoundation.framework in Frameworks */,
 				180B74E81770FFBE00EBDED1 /* AddressBook.framework in Frameworks */,
@@ -195,6 +198,8 @@
 				180B74EF17722A7E00EBDED1 /* ShowDetailViewController.m */,
 				181A14EC176B82C400134241 /* ShowsViewController.h */,
 				181A14ED176B82C400134241 /* ShowsViewController.m */,
+				18648FEF17A303F80064C414 /* ShowsLocationManager.h */,
+				18648FF017A303F80064C414 /* ShowsLocationManager.m */,
 				18D23030178CC87400733ED9 /* MyInfoWindow.h */,
 				18D23031178CC87400733ED9 /* MyInfoWindow.m */,
 				181A14EF176B85DC00134241 /* Event.h */,
@@ -343,6 +348,7 @@
 				18D23032178CC87400733ED9 /* MyInfoWindow.m in Sources */,
 				18C628981795CE94002E21DA /* EventAPIManager.m in Sources */,
 				18279798179DC2250033BC53 /* StyleController.m in Sources */,
+				18648FF117A303F80064C414 /* ShowsLocationManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -394,7 +400,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = YES;
 				"OTHER_LDFLAGS[arch=*]" = "-ObjC";
 				SDKROOT = iphoneos;
@@ -420,7 +426,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				"OTHER_LDFLAGS[arch=*]" = "-ObjC";
 				SDKROOT = iphoneos;

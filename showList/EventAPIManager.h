@@ -10,7 +10,7 @@
 
 @interface EventAPIManager : NSObject
 + (instancetype)sharedManager;
-- (void)getEventsWithLatitude:(double)lat longitude:(double)lng radius:(NSInteger)radius successBlock:(void (^)(NSMutableArray *))successBlock failureBlock:(void (^)(NSError *))failureBlock;
+- (void)getEventsWithLatitude:(double)lat longitude:(double)lng radius:(NSInteger)radius category:(NSString *)keyword successBlock:(void (^)(NSMutableArray *))successBlock failureBlock:(void (^)(NSError *))failureBlock;
 - (void)getLatAndLongWithAddress:(NSString *)address successBlock:(void (^)(double, double))successBlock failureBlock:(void (^)(NSError *))failureBlock;
 -(BOOL)stringIsValid:(NSString *)string;
 @end

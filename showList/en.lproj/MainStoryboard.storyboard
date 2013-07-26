@@ -35,7 +35,7 @@
                                     <outlet property="delegate" destination="2" id="Wwl-FZ-vKS"/>
                                 </connections>
                             </textField>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Enter Address:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QZX-4T-kQR">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Use Address:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QZX-4T-kQR">
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="FSp-Xa-YC9"/>
                                     <constraint firstAttribute="width" constant="161" id="okz-ID-PRk"/>
@@ -370,6 +370,7 @@
         <class className="ShowsViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ShowsViewController.h"/>
             <relationships>
+                <relationship kind="action" name="flipViews:"/>
                 <relationship kind="outlet" name="flipButton" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="mapView" candidateClass="GMSMapView"/>
                 <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>

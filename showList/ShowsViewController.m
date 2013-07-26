@@ -13,12 +13,12 @@
 #import "MyInfoWindow.h"
 #import "EventAPIManager.h"
 #import "StyleController.h"
+#import "ShowsLocationManager.h"
 
 #define METERS_PER_MILE 1609.344
 
 @interface ShowsViewController () <UITableViewDataSource, UITableViewDelegate, GMSMapViewDelegate>
 @property (nonatomic, assign) BOOL flipped;
-
 @end
 
 @implementation ShowsViewController{
@@ -39,17 +39,23 @@
     
     // if the use current location switch is on, get the location and use it. else, get lat and long for entered address
     if(self.useDeviceLocation){
-        self.mapView.myLocationEnabled = YES;
-        self.mapView.settings.myLocationButton = YES;
-        self.latitude = (double)self.mapView.myLocation.coordinate.latitude;
-//        CLLocation *myLocation = self.mapView.myLocation;
-        self.longitude = self.mapView.myLocation.coordinate.longitude;
-        NSLog(@"lat is %lf and long is %lf",self.mapView.myLocation.coordinate.latitude,self.mapView.myLocation.coordinate.longitude);
-        NSLog(@"switch on");
+        if([CLLocationManager locationServicesEnabled])
+        {
+        ShowsLocationManager *locationManager = [[ShowsLocationManager alloc]init];
+        [locationManager startStandardUpdates];
+        self.latitude = locationManager.location.coordinate.latitude;
+        self.longitude = locationManager.location.coordinate.longitude;
+        [locationManager stopUpdatingLocation];
+        }
+        else{
+          //throw error
+        }
+    
         [self getShowsNearby];
+    
     }
+    
     else{
-        NSLog(@"lat is %lf and long is %lf",self.mapView.myLocation.coordinate.latitude,self.mapView.myLocation.coordinate.longitude);
     [self getLatAndLong];
     }
 
@@ -73,7 +79,7 @@
 {
     self.showRadius =  10;
     
-    [[EventAPIManager sharedManager] getEventsWithLatitude:self.latitude longitude:self.longitude radius:self.showRadius successBlock:^(NSMutableArray *events)
+    [[EventAPIManager sharedManager] getEventsWithLatitude:self.latitude longitude:self.longitude radius:self.showRadius category:@"music" successBlock:^(NSMutableArray *events)
      {
          self.shows = events;
          for(Event *event in self.shows){
@@ -100,10 +106,10 @@
     
     //give event for selected row and starting address to the detail view controller
     if([[segue identifier] isEqualToString:@"ShowDetails"]){
-        ShowDetailViewController *detailViewController = [segue destinationViewController];
-        detailViewController.Event = [self.shows objectAtIndex:[self.tableView indexPathForSelectedRow].row];
-        detailViewController.startingLatitude = self.latitude;
-        detailViewController.startingLongitude = self.longitude;
+        ShowDetailViewController *destinationViewController = [segue destinationViewController];
+        destinationViewController.Event = [self.shows objectAtIndex:[self.tableView indexPathForSelectedRow].row];
+        destinationViewController.startingLatitude = self.latitude;
+        destinationViewController.startingLongitude = self.longitude;
         
         UIBarButtonItem *newBackButton = [[UIBarButtonItem alloc] initWithTitle: @"Event List" style: UIBarButtonItemStyleBordered target: nil action: nil];
         
@@ -191,6 +197,8 @@
     ShowDetailViewController *destinationViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"detailViewController"];
     
     destinationViewController.event = marker.userData;
+    destinationViewController.startingLatitude = self.latitude;
+    destinationViewController.startingLongitude = self.longitude;
     
     UIBarButtonItem *newBackButton = [[UIBarButtonItem alloc] initWithTitle: @"Event Map" style: UIBarButtonItemStyleBordered target: nil action: nil];
     
