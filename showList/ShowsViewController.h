@@ -20,7 +20,7 @@
 @property (assign, nonatomic) double latitude;
 @property (assign, nonatomic) double longitude;
 @property (nonatomic) NSInteger showRadius;
-@property (nonatomic, strong) NSString *category;
+@property (nonatomic, strong) NSString *searchString;
 
 //each show is an object
 @property (strong, nonatomic) NSMutableArray *shows;

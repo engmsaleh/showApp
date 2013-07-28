@@ -29,6 +29,8 @@
 		18279798179DC2250033BC53 /* StyleController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18279797179DC2250033BC53 /* StyleController.m */; };
 		184CCC1B17824DB9002BBADA /* house.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 184CCC1A17824DB9002BBADA /* house.jpg */; };
 		18648FF117A303F80064C414 /* ShowsLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 18648FF017A303F80064C414 /* ShowsLocationManager.m */; };
+		18C3395517A489A500831A87 /* checkbox-unchecked.png in Resources */ = {isa = PBXBuildFile; fileRef = 18C3395417A489A500831A87 /* checkbox-unchecked.png */; };
+		18C3395717A489B000831A87 /* checkbox-checked.png in Resources */ = {isa = PBXBuildFile; fileRef = 18C3395617A489B000831A87 /* checkbox-checked.png */; };
 		18C628981795CE94002E21DA /* EventAPIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C628971795CE94002E21DA /* EventAPIManager.m */; };
 		18D23032178CC87400733ED9 /* MyInfoWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D23031178CC87400733ED9 /* MyInfoWindow.m */; };
 		18D6B65E177E13B600B2FB79 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18D6B65D177E13B600B2FB79 /* AVFoundation.framework */; };
@@ -87,6 +89,8 @@
 		184CCC1A17824DB9002BBADA /* house.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = house.jpg; sourceTree = SOURCE_ROOT; };
 		18648FEF17A303F80064C414 /* ShowsLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowsLocationManager.h; sourceTree = "<group>"; };
 		18648FF017A303F80064C414 /* ShowsLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowsLocationManager.m; sourceTree = "<group>"; };
+		18C3395417A489A500831A87 /* checkbox-unchecked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checkbox-unchecked.png"; sourceTree = SOURCE_ROOT; };
+		18C3395617A489B000831A87 /* checkbox-checked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checkbox-checked.png"; sourceTree = SOURCE_ROOT; };
 		18C628961795CE94002E21DA /* EventAPIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventAPIManager.h; sourceTree = "<group>"; };
 		18C628971795CE94002E21DA /* EventAPIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventAPIManager.m; sourceTree = "<group>"; };
 		18D23030178CC87400733ED9 /* MyInfoWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyInfoWindow.h; sourceTree = "<group>"; };
@@ -230,6 +234,8 @@
 		18F70FF3179F0710002DF15B /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				18C3395417A489A500831A87 /* checkbox-unchecked.png */,
+				18C3395617A489B000831A87 /* checkbox-checked.png */,
 				18ECC9F7179F306D003C8ED6 /* Inder-Regular.otf */,
 				18ECC9F5179F2F62003C8ED6 /* Days.otf */,
 				18F70FFA179F29A3002DF15B /* texgyrebonum-regular.otf */,
@@ -328,6 +334,8 @@
 				18F70FFB179F29A3002DF15B /* texgyrebonum-regular.otf in Resources */,
 				18ECC9F6179F2F62003C8ED6 /* Days.otf in Resources */,
 				18ECC9F8179F306E003C8ED6 /* Inder-Regular.otf in Resources */,
+				18C3395517A489A500831A87 /* checkbox-unchecked.png in Resources */,
+				18C3395717A489B000831A87 /* checkbox-checked.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

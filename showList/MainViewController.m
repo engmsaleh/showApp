@@ -11,7 +11,9 @@
 #import "StyleController.h"
 
 @interface MainViewController ()
-
+@property BOOL checkboxSelected;
+@property (nonatomic, strong) NSArray *checkboxes;
+@property (nonatomic, strong) NSDictionary *searchCategoriesDictionary;
 @end
 
 @implementation MainViewController
@@ -25,9 +27,49 @@
     UIColor *backgroundColor = [[StyleController sharedStyleController]primaryBackgroundColor];
     UIColor *buttonColor = [[StyleController sharedStyleController]buttonBackgroundColor];
     UIFont *primaryFont = [[StyleController sharedStyleController]navFont];
+    UIImage *checked = [UIImage imageNamed:@"checkbox-checked.png"];
+    UIImage *unchecked = [UIImage imageNamed:@"checkbox-unchecked.png"];
+    
+    self.checkboxes = [[NSArray alloc]initWithObjects:self.checkbox1,self.checkbox2,self.checkbox3,self.checkbox4,self.checkbox5,self.checkbox6, nil];
+    NSArray *searchCategories = [[NSArray alloc]initWithObjects:@"music",@"art",@"food",@"books",@"comedy",@"family_fun_kids", nil];
+    self.searchCategoriesDictionary = [[NSDictionary alloc]initWithObjects:searchCategories forKeys:[[NSArray alloc]initWithObjects:self.checkbox1.restorationIdentifier, self.checkbox2.restorationIdentifier, self.checkbox3.restorationIdentifier, self.checkbox4.restorationIdentifier, self.checkbox5.restorationIdentifier, self.checkbox6.restorationIdentifier, nil]];
+    
+    [self.checkbox1 setBackgroundImage:unchecked forState:UIControlStateNormal];
+    [self.checkbox1 setBackgroundImage:checked forState:UIControlStateSelected];
+    [self.checkbox1 addTarget:self action:@selector(checkboxSelected:) forControlEvents:UIControlEventTouchUpInside];
+    [self.checkbox2 setBackgroundImage:unchecked forState:UIControlStateNormal];
+    [self.checkbox2 setBackgroundImage:checked forState:UIControlStateSelected];
+    [self.checkbox2 addTarget:self action:@selector(checkboxSelected:) forControlEvents:UIControlEventTouchUpInside];
+    [self.checkbox3 setBackgroundImage:unchecked forState:UIControlStateNormal];
+    [self.checkbox3 setBackgroundImage:checked forState:UIControlStateSelected];
+    [self.checkbox3 addTarget:self action:@selector(checkboxSelected:) forControlEvents:UIControlEventTouchUpInside];
+    [self.checkbox4 setBackgroundImage:unchecked forState:UIControlStateNormal];
+    [self.checkbox4 setBackgroundImage:checked forState:UIControlStateSelected];
+    [self.checkbox4 addTarget:self action:@selector(checkboxSelected:) forControlEvents:UIControlEventTouchUpInside];
+    [self.checkbox5 setBackgroundImage:unchecked forState:UIControlStateNormal];
+    [self.checkbox5 setBackgroundImage:checked forState:UIControlStateSelected];
+    [self.checkbox5 addTarget:self action:@selector(checkboxSelected:) forControlEvents:UIControlEventTouchUpInside];
+    [self.checkbox6 setBackgroundImage:unchecked forState:UIControlStateNormal];
+    [self.checkbox6 setBackgroundImage:checked forState:UIControlStateSelected];
+    [self.checkbox6 addTarget:self action:@selector(checkboxSelected:) forControlEvents:UIControlEventTouchUpInside];
+    
+    self.musicLabel.textColor = buttonTextColor;
+    self.musicLabel.font = [primaryFont fontWithSize:16];
+    self.artLabel.textColor = buttonTextColor;
+    self.artLabel.font = [primaryFont fontWithSize:16];
+    self.foodLabel.textColor = buttonTextColor;
+    self.foodLabel.font = [primaryFont fontWithSize:16];
+    self.booksLabel.textColor = buttonTextColor;
+    self.booksLabel.font = [primaryFont fontWithSize:16];
+    self.comedyLabel.textColor = buttonTextColor;
+    self.comedyLabel.font = [primaryFont fontWithSize:16];
+    self.familyLabel.textColor = buttonTextColor;
+    self.familyLabel.font = [primaryFont fontWithSize:16];
     
     self.view.backgroundColor = backgroundColor;
     self.navigationItem.title = @"Event Search";
+    self.searchLabel.textColor = primaryTextColor;
+    self.searchLabel.font = [primaryFont fontWithSize:18];
     self.addressField.placeholder = @"3308 SE Clinton St, Portland, OR 97202";
     self.addressFieldLabel.textColor = primaryTextColor;
     self.addressFieldLabel.font = [primaryFont fontWithSize:18];
@@ -43,6 +85,13 @@
     
 }
 
+-(void)checkboxSelected:(id)sender{
+    UIButton *checkbox = (UIButton *) sender;
+    if([checkbox isSelected])
+        [checkbox setSelected:NO];
+    else
+        [checkbox setSelected:YES]; 
+}
 
 - (void)didReceiveMemoryWarning
 {
@@ -66,6 +115,17 @@
         
         UIBarButtonItem *newBackButton = [[UIBarButtonItem alloc] initWithTitle: @"New Location" style: UIBarButtonItemStyleBordered target: nil action: nil];
         [[self navigationItem] setBackBarButtonItem: newBackButton];
+        
+        NSString *searchString = @"";
+        for(UIButton *checkbox in self.checkboxes){
+            if(checkbox.isSelected)
+            {
+                NSString *category = [self.searchCategoriesDictionary objectForKey:checkbox.restorationIdentifier];
+                searchString = [NSString stringWithFormat:@"%@,%@",searchString,category];
+            }
+            
+        }
+        showsViewController.searchString = searchString;
         
         if([self.useDeviceLocation isOn]){
             showsViewController.useDeviceLocation = YES;

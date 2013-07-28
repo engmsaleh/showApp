@@ -24,9 +24,10 @@
     return sharedManager;
 }
 
-- (void)getEventsWithLatitude:(double)lat longitude:(double)lng radius:(NSInteger)radius category:(NSString *)category successBlock:(void (^)(NSMutableArray *))successBlock failureBlock:(void (^)(NSError *))failureBlock;
+- (void)getEventsWithLatitude:(double)lat longitude:(double)lng radius:(NSInteger)radius categories:(NSString *)categories successBlock:(void (^)(NSMutableArray *))successBlock failureBlock:(void (^)(NSError *))failureBlock;
 {
-    NSString *path = [NSString stringWithFormat:@"http://api.eventful.com/json/events/search?app_key=d3DQ7TBbGGmj2jMD&q=tag:%@&l=%lf,%lf&date=Today&within=%d&units=miles&page_size=100",category,lat,lng,radius];
+    
+    NSString *path = [NSString stringWithFormat:@"http://api.eventful.com/json/events/search?app_key=d3DQ7TBbGGmj2jMD&c=%@&l=%lf,%lf&date=Today&within=%d&units=miles&page_size=100",categories,lat,lng,radius];
     
     path = [path stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:path]];

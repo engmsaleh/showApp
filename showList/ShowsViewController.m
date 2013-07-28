@@ -79,7 +79,7 @@
 {
     self.showRadius =  10;
     
-    [[EventAPIManager sharedManager] getEventsWithLatitude:self.latitude longitude:self.longitude radius:self.showRadius category:@"music" successBlock:^(NSMutableArray *events)
+    [[EventAPIManager sharedManager] getEventsWithLatitude:self.latitude longitude:self.longitude radius:self.showRadius categories:self.searchString successBlock:^(NSMutableArray *events)
      {
          self.shows = events;
          for(Event *event in self.shows){
