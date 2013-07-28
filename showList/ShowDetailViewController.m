@@ -28,7 +28,19 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    [self setupView];
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+#pragma mark Custom Methods
+
+-(void)setupView
+{
     UIColor *buttonTitleColor = [[StyleController sharedStyleController] detailTextColor];
     UIColor *buttonBackgroundColor = [[StyleController sharedStyleController] buttonBackgroundColor];
     UIColor *artistLabelColor = [[StyleController sharedStyleController] artistTextColor];
@@ -71,17 +83,11 @@
     else if(self.event.isAllDay){
         self.timeLabel.text = @"All Day";
     }
-    
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 //Convert 24hr clock times to 12hr
--(NSString *)formatTo12Hr:(NSString *)time{
+-(NSString *)formatTo12Hr:(NSString *)time
+{
     NSString *minString = [time substringFromIndex:2];
     NSString *hourString = [time substringToIndex:2];
     NSString *timeSuffix;
@@ -100,7 +106,10 @@
     return convertedTime;
 }
 
--(IBAction)getDirections{
+#pragma mark UIButton Target Methods
+
+-(IBAction)getDirections
+{
     
     //use google maps if device has it
     if([[UIApplication sharedApplication] canOpenURL:
@@ -117,7 +126,8 @@
     }
 }
 
--(IBAction)visitEventSite{
+-(IBAction)visitEventSite
+{
     [[UIApplication sharedApplication]openURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@", self.event.url]]];
 
 }

@@ -21,18 +21,34 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    UIColor *primaryTextColor = [[StyleController sharedStyleController]artistTextColor];
-    UIColor *buttonTextColor = [[StyleController sharedStyleController]detailTextColor];
-    UIColor *backgroundColor = [[StyleController sharedStyleController]primaryBackgroundColor];
-    UIColor *buttonColor = [[StyleController sharedStyleController]buttonBackgroundColor];
-    UIFont *primaryFont = [[StyleController sharedStyleController]navFont];
-    UIImage *checked = [UIImage imageNamed:@"checkbox-checked.png"];
-    UIImage *unchecked = [UIImage imageNamed:@"checkbox-unchecked.png"];
+    [self setupStyles];
+    [self setupCheckboxes];
     
     self.checkboxes = [[NSArray alloc]initWithObjects:self.checkbox1,self.checkbox2,self.checkbox3,self.checkbox4,self.checkbox5,self.checkbox6, nil];
-    NSArray *searchCategories = [[NSArray alloc]initWithObjects:@"music",@"art",@"food",@"books",@"comedy",@"family_fun_kids", nil];
+    NSArray *searchCategories = [[NSArray alloc]initWithObjects:@"music",@"art,movies_film,performing_arts",@"food",@"books",@"comedy",@"family_fun_kids,learning_education", nil];
     self.searchCategoriesDictionary = [[NSDictionary alloc]initWithObjects:searchCategories forKeys:[[NSArray alloc]initWithObjects:self.checkbox1.restorationIdentifier, self.checkbox2.restorationIdentifier, self.checkbox3.restorationIdentifier, self.checkbox4.restorationIdentifier, self.checkbox5.restorationIdentifier, self.checkbox6.restorationIdentifier, nil]];
+    
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+#pragma mark Custom Methods
+
+-(void)checkboxSelected:(id)sender{
+    UIButton *checkbox = (UIButton *) sender;
+    if([checkbox isSelected])
+        [checkbox setSelected:NO];
+    else
+        [checkbox setSelected:YES];
+}
+
+-(void)setupCheckboxes{
+    UIImage *checked = [UIImage imageNamed:@"checkbox-checked.png"];
+    UIImage *unchecked = [UIImage imageNamed:@"checkbox-unchecked.png"];
     
     [self.checkbox1 setBackgroundImage:unchecked forState:UIControlStateNormal];
     [self.checkbox1 setBackgroundImage:checked forState:UIControlStateSelected];
@@ -52,6 +68,15 @@
     [self.checkbox6 setBackgroundImage:unchecked forState:UIControlStateNormal];
     [self.checkbox6 setBackgroundImage:checked forState:UIControlStateSelected];
     [self.checkbox6 addTarget:self action:@selector(checkboxSelected:) forControlEvents:UIControlEventTouchUpInside];
+}
+
+-(void)setupStyles{
+    
+    UIColor *primaryTextColor = [[StyleController sharedStyleController]artistTextColor];
+    UIColor *buttonTextColor = [[StyleController sharedStyleController]detailTextColor];
+    UIColor *backgroundColor = [[StyleController sharedStyleController]primaryBackgroundColor];
+    UIColor *buttonColor = [[StyleController sharedStyleController]buttonBackgroundColor];
+    UIFont *primaryFont = [[StyleController sharedStyleController]navFont];
     
     self.musicLabel.textColor = buttonTextColor;
     self.musicLabel.font = [primaryFont fontWithSize:16];
@@ -83,20 +108,7 @@
     [self.retrieveShowsButton setTitleColor:buttonTextColor forState:UIControlStateNormal];
     [self.retrieveShowsButton titleLabel].font = [primaryFont fontWithSize:16];
     
-}
-
--(void)checkboxSelected:(id)sender{
-    UIButton *checkbox = (UIButton *) sender;
-    if([checkbox isSelected])
-        [checkbox setSelected:NO];
-    else
-        [checkbox setSelected:YES]; 
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    
 }
 
 #pragma mark - Text field delegate
@@ -107,6 +119,8 @@
     }
     return YES;
 }
+
+#pragma mark Segues
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if([[segue identifier] isEqualToString:@"ShowShows"]){
