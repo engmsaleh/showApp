@@ -41,22 +41,21 @@
     if(self.useDeviceLocation){
         if([CLLocationManager locationServicesEnabled])
         {
-        ShowsLocationManager *locationManager = [[ShowsLocationManager alloc]init];
-        [locationManager startStandardUpdates];
-        self.latitude = locationManager.location.coordinate.latitude;
-        self.longitude = locationManager.location.coordinate.longitude;
-        [locationManager stopUpdatingLocation];
+            [[ShowsLocationManager sharedManager] startStandardUpdates:^(CLLocation *newLocation) {
+                self.latitude = newLocation.coordinate.latitude;
+                self.longitude = newLocation.coordinate.longitude;
+                
+                [self getShowsNearby];
+            }];
         }
         else{
           //throw error
         }
-    
-        [self getShowsNearby];
-    
+
     }
     
     else{
-    [self getLatAndLong];
+        [self getLatAndLong];
     }
 
 }

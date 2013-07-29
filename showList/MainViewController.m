@@ -25,7 +25,7 @@
     [self setupCheckboxes];
     
     self.checkboxes = [[NSArray alloc]initWithObjects:self.checkbox1,self.checkbox2,self.checkbox3,self.checkbox4,self.checkbox5,self.checkbox6, nil];
-    NSArray *searchCategories = [[NSArray alloc]initWithObjects:@"music",@"art,movies_film,performing_arts",@"food",@"books",@"comedy",@"family_fun_kids,learning_education", nil];
+    NSArray *searchCategories = [[NSArray alloc]initWithObjects:@"music",@"food",@"art,performing_arts",@"books,movies_film",@"family_fun_kids,learning_education,comedy",@"", nil];
     self.searchCategoriesDictionary = [[NSDictionary alloc]initWithObjects:searchCategories forKeys:[[NSArray alloc]initWithObjects:self.checkbox1.restorationIdentifier, self.checkbox2.restorationIdentifier, self.checkbox3.restorationIdentifier, self.checkbox4.restorationIdentifier, self.checkbox5.restorationIdentifier, self.checkbox6.restorationIdentifier, nil]];
     
 }
@@ -34,6 +34,70 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+
+#pragma mark - Text field delegate
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField{
+    if(textField == self.addressField){
+        [textField resignFirstResponder];
+        [self slideTextField:textField up:NO];
+    }
+    return YES;
+}
+
+-(void)textFieldDidBeginEditing:(UITextField *)textField{
+    if(textField == self.addressField)
+    [self slideTextField:textField up:YES];
+}
+
+
+
+-(void)slideTextField: (UITextField *)textField up:(BOOL)up{
+    
+    int movementDistance = 175;
+    
+    int movement = (up ? -movementDistance : 0);
+    CGRect newFrame = self.view.frame;
+    newFrame.origin.y = movement;
+    
+    [UIView animateWithDuration:.25 animations:^{
+        self.view.frame = newFrame;
+    }];
+}
+
+#pragma mark Segues
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if([[segue identifier] isEqualToString:@"ShowShows"]){
+        
+        ShowsViewController *showsViewController = [segue destinationViewController];
+        
+        UIBarButtonItem *newBackButton = [[UIBarButtonItem alloc] initWithTitle: @"New Search" style: UIBarButtonItemStyleBordered target: nil action: nil];
+        [[self navigationItem] setBackBarButtonItem: newBackButton];
+        
+        NSString *searchString = @"";
+        for(UIButton *checkbox in self.checkboxes){
+            if(checkbox.isSelected)
+            {
+                NSString *category = [self.searchCategoriesDictionary objectForKey:checkbox.restorationIdentifier];
+                searchString = [NSString stringWithFormat:@"%@,%@",searchString,category];
+            }
+            
+        }
+        showsViewController.searchString = searchString;
+        
+        if([self.useDeviceLocation isOn]){
+            showsViewController.useDeviceLocation = YES;
+        }
+        else if([self.addressField.text length]>4){
+            showsViewController.address = self.addressField.text;
+        }
+        else{
+            showsViewController.address = @"3308 se clinton st, portland, or 97202";
+        }
+    }
 }
 
 #pragma mark Custom Methods
@@ -109,48 +173,6 @@
     [self.retrieveShowsButton titleLabel].font = [primaryFont fontWithSize:16];
     
     
-}
-
-#pragma mark - Text field delegate
-
--(BOOL)textFieldShouldReturn:(UITextField *)textField{
-    if(textField == self.addressField){
-        [textField resignFirstResponder];
-    }
-    return YES;
-}
-
-#pragma mark Segues
-
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-    if([[segue identifier] isEqualToString:@"ShowShows"]){
-        
-        ShowsViewController *showsViewController = [segue destinationViewController];
-        
-        UIBarButtonItem *newBackButton = [[UIBarButtonItem alloc] initWithTitle: @"New Location" style: UIBarButtonItemStyleBordered target: nil action: nil];
-        [[self navigationItem] setBackBarButtonItem: newBackButton];
-        
-        NSString *searchString = @"";
-        for(UIButton *checkbox in self.checkboxes){
-            if(checkbox.isSelected)
-            {
-                NSString *category = [self.searchCategoriesDictionary objectForKey:checkbox.restorationIdentifier];
-                searchString = [NSString stringWithFormat:@"%@,%@",searchString,category];
-            }
-            
-        }
-        showsViewController.searchString = searchString;
-        
-        if([self.useDeviceLocation isOn]){
-            showsViewController.useDeviceLocation = YES;
-        }
-        else if([self.addressField.text length]>4){
-            showsViewController.address = self.addressField.text;
-        }
-        else{
-            showsViewController.address = @"3308 se clinton st, portland, or 97202";
-        }
-    }
 }
 
 

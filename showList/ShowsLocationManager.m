@@ -9,21 +9,43 @@
 #import "ShowsLocationManager.h"
 
 @interface ShowsLocationManager () <CLLocationManagerDelegate>
-
+@property (nonatomic, strong) CLLocationManager *locationManager;
+@property (nonatomic, copy) void (^locationUpdateBlock)(CLLocation *);
 @end
 
 @implementation ShowsLocationManager
 
--(void)startStandardUpdates
++ (instancetype)sharedManager
 {
-    [self setDelegate:self];
-    self.desiredAccuracy = kCLLocationAccuracyKilometer;
+    static ShowsLocationManager *sharedManager;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        sharedManager = [[ShowsLocationManager alloc] init];
+    });
     
-    // Set a movement threshold for new events.
-    self.distanceFilter = 500;
-    
-    [self startUpdatingLocation];
+    return sharedManager;
+}
 
+- (id)init
+{
+    self = [super init];
+    if (self)
+    {
+        _locationManager = [[CLLocationManager alloc] init];
+        _locationManager.delegate = self;
+        _locationManager.desiredAccuracy = kCLLocationAccuracyKilometer;
+        
+        // Set a movement threshold for new events.
+        _locationManager.distanceFilter = 500;
+    }
+    
+    return self;
+}
+
+-(void)startStandardUpdates:(void (^)(CLLocation *))updateBlock
+{
+    self.locationUpdateBlock = updateBlock;
+    [self.locationManager startUpdatingLocation];
 }
 
 
@@ -42,6 +64,11 @@
         NSLog(@"latitude %+.6f, longitude %+.6f\n",
               location.coordinate.latitude,
               location.coordinate.longitude);
+        
+        if (self.locationUpdateBlock)
+            self.locationUpdateBlock(location);
+        
+        [self.locationManager stopUpdatingLocation];
     }
 }
 

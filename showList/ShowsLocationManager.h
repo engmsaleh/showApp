@@ -8,8 +8,9 @@
 
 #import <CoreLocation/CoreLocation.h>
 
-@interface ShowsLocationManager : CLLocationManager
+@interface ShowsLocationManager : NSObject
 
--(void)startStandardUpdates;
++ (instancetype)sharedManager;
+-(void)startStandardUpdates:(void (^)(CLLocation *))updateBlock;
 
 @end

@@ -14,6 +14,7 @@
 - (UIColor *)colorWithHex:(UInt32)hex alpha:(CGFloat)alpha;
 -(void)applyStyle;
 
+
 @property (nonatomic, strong, readonly) UIColor *artistTextColor;
 @property (nonatomic, strong, readonly) UIColor *venueTextColor;
 @property (nonatomic, strong, readonly) UIColor *detailTextColor;
