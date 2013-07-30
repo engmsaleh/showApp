@@ -113,24 +113,31 @@
 -(void)setupCheckboxes{
     UIImage *checked = [UIImage imageNamed:@"checkbox-checked.png"];
     UIImage *unchecked = [UIImage imageNamed:@"checkbox-unchecked.png"];
+    UIEdgeInsets checkboxInsets = UIEdgeInsetsMake(12, 12, 12, 12);;
     
-    [self.checkbox1 setBackgroundImage:unchecked forState:UIControlStateNormal];
-    [self.checkbox1 setBackgroundImage:checked forState:UIControlStateSelected];
+    [self.checkbox1 setImage:unchecked forState:UIControlStateNormal];
+    [self.checkbox1 setImage:checked forState:UIControlStateSelected];
+    self.checkbox1.imageEdgeInsets = checkboxInsets;
     [self.checkbox1 addTarget:self action:@selector(checkboxSelected:) forControlEvents:UIControlEventTouchUpInside];
-    [self.checkbox2 setBackgroundImage:unchecked forState:UIControlStateNormal];
-    [self.checkbox2 setBackgroundImage:checked forState:UIControlStateSelected];
+    [self.checkbox2 setImage:unchecked forState:UIControlStateNormal];
+    [self.checkbox2 setImage:checked forState:UIControlStateSelected];
+    self.checkbox2.imageEdgeInsets = checkboxInsets;
     [self.checkbox2 addTarget:self action:@selector(checkboxSelected:) forControlEvents:UIControlEventTouchUpInside];
-    [self.checkbox3 setBackgroundImage:unchecked forState:UIControlStateNormal];
-    [self.checkbox3 setBackgroundImage:checked forState:UIControlStateSelected];
+    [self.checkbox3 setImage:unchecked forState:UIControlStateNormal];
+    [self.checkbox3 setImage:checked forState:UIControlStateSelected];
+    self.checkbox3.imageEdgeInsets = checkboxInsets;
     [self.checkbox3 addTarget:self action:@selector(checkboxSelected:) forControlEvents:UIControlEventTouchUpInside];
-    [self.checkbox4 setBackgroundImage:unchecked forState:UIControlStateNormal];
-    [self.checkbox4 setBackgroundImage:checked forState:UIControlStateSelected];
+    [self.checkbox4 setImage:unchecked forState:UIControlStateNormal];
+    [self.checkbox4 setImage:checked forState:UIControlStateSelected];
+    self.checkbox4.imageEdgeInsets = checkboxInsets;
     [self.checkbox4 addTarget:self action:@selector(checkboxSelected:) forControlEvents:UIControlEventTouchUpInside];
-    [self.checkbox5 setBackgroundImage:unchecked forState:UIControlStateNormal];
-    [self.checkbox5 setBackgroundImage:checked forState:UIControlStateSelected];
+    [self.checkbox5 setImage:unchecked forState:UIControlStateNormal];
+    [self.checkbox5 setImage:checked forState:UIControlStateSelected];
+    self.checkbox5.imageEdgeInsets = checkboxInsets;
     [self.checkbox5 addTarget:self action:@selector(checkboxSelected:) forControlEvents:UIControlEventTouchUpInside];
-    [self.checkbox6 setBackgroundImage:unchecked forState:UIControlStateNormal];
-    [self.checkbox6 setBackgroundImage:checked forState:UIControlStateSelected];
+    [self.checkbox6 setImage:unchecked forState:UIControlStateNormal];
+    [self.checkbox6 setImage:checked forState:UIControlStateSelected];
+    self.checkbox6.imageEdgeInsets = checkboxInsets;
     [self.checkbox6 addTarget:self action:@selector(checkboxSelected:) forControlEvents:UIControlEventTouchUpInside];
 }
 

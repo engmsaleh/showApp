@@ -68,7 +68,10 @@
             if([self stringIsValid:eventInfo[@"venue_name"]])
                 event.venueName = eventInfo[@"venue_name"];
             if([self stringIsValid:eventInfo[@"description"]])
-                event.description = eventInfo[@"description"];
+            {
+                NSString *descriptionString = eventInfo[@"description"];
+                event.description = [self stringByStrippingHTMLFromString:descriptionString];
+            }
             if([self stringIsValid:eventInfo[@"venue_address"]])
                 event.address = eventInfo[@"venue_address"];
             if([self stringIsValid:eventInfo[@"url"]])
@@ -85,6 +88,10 @@
             }
     
             [shows addObject:event];
+            
+            //test for fake events
+            if([event.venueName isEqualToString:@"syndical"])
+                [shows removeLastObject];
         }
     return shows;
 }
@@ -98,11 +105,26 @@
     return NO;
 }
 
+-(NSString *)stringByStrippingHTMLFromString:(NSString *)string
+{ 
+    NSRange range;
+    while ((range = [string rangeOfString:@"<[^>]+>" options:NSRegularExpressionSearch]).location != NSNotFound)
+        string = [string stringByReplacingCharactersInRange:range withString:@""];
+    
+    NSString *stringToRemove = @"&#39;";
+    string = [string stringByReplacingOccurrencesOfString:stringToRemove withString:@"'"];
+    stringToRemove = @"&quot;";
+    string = [string stringByReplacingOccurrencesOfString:stringToRemove withString:@"\""];
+    
+    
+    return string;
+}
+
 //- (NSArray *)parseOtherAPI
 //{
 //    
 //}
-
+ 
 - (void)getLatAndLongWithAddress:(NSString *)address successBlock:(void (^)(double, double))successBlock failureBlock:(void (^)(NSError *))failureBlock
 {
     NSString *path = [NSString stringWithFormat:@"http://maps.googleapis.com/maps/api/geocode/json?address=%@&sensor=false",address];
